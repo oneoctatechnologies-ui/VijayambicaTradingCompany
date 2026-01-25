@@ -27,11 +27,37 @@ export default function Navbar() {
 
     const isSolid = pathname !== "/" || isScrolled;
 
-    const handleLinkClick = (href: string) => {
-        if (pathname !== "/" && href.startsWith("/#")) {
-            // If we're not on home page and clicking a hash link, navigate to home first
-            router.push("/");
-            setTimeout(() => {
+    const handleLinkClick = (href: string, e?: React.MouseEvent) => {
+        if (e) {
+            e.preventDefault();
+        }
+        
+        if (href === "/") {
+            // If clicking home, always scroll to top
+            if (pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                router.push("/");
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }, 100);
+            }
+        } else if (href.startsWith("/#")) {
+            // Handle hash links
+            if (pathname !== "/") {
+                // If we're not on home page, navigate to home first
+                router.push("/");
+                setTimeout(() => {
+                    const hash = href.split("#")[1];
+                    if (hash) {
+                        const element = document.getElementById(hash);
+                        if (element) {
+                            element.scrollIntoView({ behavior: "smooth" });
+                        }
+                    }
+                }, 100);
+            } else {
+                // If we're on home page, just scroll to section
                 const hash = href.split("#")[1];
                 if (hash) {
                     const element = document.getElementById(hash);
@@ -39,11 +65,7 @@ export default function Navbar() {
                         element.scrollIntoView({ behavior: "smooth" });
                     }
                 }
-            }, 100);
-        } else if (pathname !== "/" && href === "/") {
-            // If clicking home from another page, navigate to home
-            router.push("/");
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            }
         }
         setIsOpen(false);
     };
@@ -60,15 +82,11 @@ export default function Navbar() {
                 <Link
                     href="/"
                     onClick={(e) => {
-                        if (pathname !== "/") {
-                            e.preventDefault();
-                            router.push("/");
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                        }
+                        handleLinkClick("/", e);
                     }}
                     className="flex items-center gap-3 group cursor-pointer"
                 >
-                    <span className="text-xl font-bold tracking-widest uppercase hover:text-gray-300 transition-colors">VIJAYAMBICA TRADING CO.</span>
+                    <span className="text-lg font-bold tracking-widest uppercase hover:text-gray-300 transition-colors">VIJAYAMBICA TRADING CO.</span>
                 </Link>
 
                 {/* Desktop Menu */}
@@ -78,13 +96,7 @@ export default function Navbar() {
                             key={link.name}
                             href={link.href}
                             onClick={(e) => {
-                                if (pathname !== "/" && link.href.startsWith("/#")) {
-                                    e.preventDefault();
-                                    handleLinkClick(link.href);
-                                } else if (pathname !== "/" && link.href === "/") {
-                                    e.preventDefault();
-                                    handleLinkClick(link.href);
-                                }
+                                handleLinkClick(link.href, e);
                             }}
                             className="text-sm font-medium tracking-wide text-gray-300 hover:text-white transition-colors uppercase"
                         >
@@ -94,10 +106,7 @@ export default function Navbar() {
                     <Link
                         href="/#contact"
                         onClick={(e) => {
-                            if (pathname !== "/") {
-                                e.preventDefault();
-                                handleLinkClick("/#contact");
-                            }
+                            handleLinkClick("/#contact", e);
                         }}
                         className="px-5 py-2 bg-white text-charcoal font-semibold text-sm rounded-sm hover:bg-industrial-green hover:text-white transition-all duration-300"
                     >
@@ -128,15 +137,7 @@ export default function Navbar() {
                                 key={link.name}
                                 href={link.href}
                                 onClick={(e) => {
-                                    if (pathname !== "/" && link.href.startsWith("/#")) {
-                                        e.preventDefault();
-                                        handleLinkClick(link.href);
-                                    } else if (pathname !== "/" && link.href === "/") {
-                                        e.preventDefault();
-                                        handleLinkClick(link.href);
-                                    } else {
-                                        setIsOpen(false);
-                                    }
+                                    handleLinkClick(link.href, e);
                                 }}
                                 className="text-lg text-gray-300"
                             >
