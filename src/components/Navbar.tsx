@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { Menu, X, Home, Info, Cog, Award, Phone } from "lucide-react";
 
 const links = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
-    { name: "Process", href: "/#process" },
-    { name: "Why Us", href: "/#why-us" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Home", href: "/", icon: Home },
+    { name: "About", href: "/#about", icon: Info },
+    { name: "Process", href: "/#process", icon: Cog },
+    { name: "Why Us", href: "/#why-us", icon: Award },
+    { name: "Contact", href: "/#contact", icon: Phone },
 ];
 
 export default function Navbar() {
@@ -86,7 +86,11 @@ export default function Navbar() {
                     }}
                     className="flex items-center gap-3 group cursor-pointer"
                 >
-                    <span className="text-lg font-bold tracking-widest uppercase hover:text-gray-300 transition-colors">VIJAYAMBICA TRADING CO.</span>
+                    <span className={`text-base md:text-lg font-bold tracking-widest uppercase transition-colors ${
+                        isSolid ? "text-white hover:text-gray-200" : "text-white hover:text-gray-300"
+                    }`}>
+                        VIJAYAMBICA TRADING CO.
+                    </span>
                 </Link>
 
                 {/* Desktop Menu */}
@@ -123,30 +127,81 @@ export default function Navbar() {
                 </button>
             </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="md:hidden bg-charcoal border-t border-gray-800"
-                >
-                    <div className="flex flex-col p-6 gap-6 items-center">
-                        {links.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                onClick={(e) => {
-                                    handleLinkClick(link.href, e);
-                                }}
-                                className="text-lg text-gray-300"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
-                </motion.div>
-            )}
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsOpen(false)}
+                            className="fixed inset-0 bg-black/50 z-[99] md:hidden"
+                        />
+                        
+                        {/* Mobile Menu */}
+                        <motion.div
+                            initial={{ x: "-100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "-100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="fixed top-0 left-0 h-full w-[280px] bg-charcoal shadow-2xl z-[100] md:hidden overflow-y-auto"
+                        >
+                            {/* Mobile Menu Header */}
+                            <div className="flex items-center justify-between p-6 border-b border-gray-800">
+                                <Link
+                                    href="/"
+                                    onClick={(e) => {
+                                        handleLinkClick("/", e);
+                                    }}
+                                    className="flex items-center gap-2 group"
+                                >
+                                    <span className="text-base font-bold tracking-widest uppercase text-white group-hover:text-gray-200 transition-colors">
+                                        VIJAYAMBICA TRADING CO.
+                                    </span>
+                                </Link>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-gray-400 hover:text-white transition-colors p-2"
+                                    aria-label="Close menu"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            {/* Mobile Menu Items */}
+                            <div className="flex flex-col py-4">
+                                {links.map((link) => {
+                                    const Icon = link.icon;
+                                    return (
+                                        <Link
+                                            key={link.name}
+                                            href={link.href}
+                                            onClick={(e) => {
+                                                handleLinkClick(link.href, e);
+                                            }}
+                                            className="flex items-center gap-4 px-6 py-4 text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all group"
+                                        >
+                                            <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors" />
+                                            <span className="text-base font-medium uppercase tracking-wide">{link.name}</span>
+                                        </Link>
+                                    );
+                                })}
+                                <Link
+                                    href="/#contact"
+                                    onClick={(e) => {
+                                        handleLinkClick("/#contact", e);
+                                    }}
+                                    className="mx-6 mt-4 px-6 py-3 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide"
+                                >
+                                    Get in Touch
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </motion.nav>
     );
 }
