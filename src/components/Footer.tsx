@@ -55,7 +55,7 @@ export default function Footer() {
                     className="group flex flex-col items-center md:items-end gap-1"
                 >
                     <span className="text-[10px] uppercase tracking-[0.4em] text-gray-400 group-hover:text-white transition-all font-medium">
-                        MADE BY ONEOCTA
+                        MADE BY ONEOCTA.COM
                     </span>
                     <div className="h-[2px] w-8 bg-industrial-green scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right"></div>
                 </a>

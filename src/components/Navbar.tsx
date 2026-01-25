@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -16,6 +16,7 @@ const links = [
 
 export default function Navbar() {
     const pathname = usePathname();
+    const router = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const { scrollY } = useScroll();
@@ -25,6 +26,27 @@ export default function Navbar() {
     });
 
     const isSolid = pathname !== "/" || isScrolled;
+
+    const handleLinkClick = (href: string) => {
+        if (pathname !== "/" && href.startsWith("/#")) {
+            // If we're not on home page and clicking a hash link, navigate to home first
+            router.push("/");
+            setTimeout(() => {
+                const hash = href.split("#")[1];
+                if (hash) {
+                    const element = document.getElementById(hash);
+                    if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            }, 100);
+        } else if (pathname !== "/" && href === "/") {
+            // If clicking home from another page, navigate to home
+            router.push("/");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        setIsOpen(false);
+    };
 
     return (
         <motion.nav
@@ -37,6 +59,13 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
                 <Link
                     href="/"
+                    onClick={(e) => {
+                        if (pathname !== "/") {
+                            e.preventDefault();
+                            router.push("/");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                    }}
                     className="flex items-center gap-3 group cursor-pointer"
                 >
                     <span className="text-xl font-bold tracking-widest uppercase hover:text-gray-300 transition-colors">VIJAYAMBICA TRADING CO.</span>
@@ -48,6 +77,15 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
+                            onClick={(e) => {
+                                if (pathname !== "/" && link.href.startsWith("/#")) {
+                                    e.preventDefault();
+                                    handleLinkClick(link.href);
+                                } else if (pathname !== "/" && link.href === "/") {
+                                    e.preventDefault();
+                                    handleLinkClick(link.href);
+                                }
+                            }}
                             className="text-sm font-medium tracking-wide text-gray-300 hover:text-white transition-colors uppercase"
                         >
                             {link.name}
@@ -55,6 +93,12 @@ export default function Navbar() {
                     ))}
                     <Link
                         href="/#contact"
+                        onClick={(e) => {
+                            if (pathname !== "/") {
+                                e.preventDefault();
+                                handleLinkClick("/#contact");
+                            }
+                        }}
                         className="px-5 py-2 bg-white text-charcoal font-semibold text-sm rounded-sm hover:bg-industrial-green hover:text-white transition-all duration-300"
                     >
                         Get in Touch
@@ -83,8 +127,18 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
+                                onClick={(e) => {
+                                    if (pathname !== "/" && link.href.startsWith("/#")) {
+                                        e.preventDefault();
+                                        handleLinkClick(link.href);
+                                    } else if (pathname !== "/" && link.href === "/") {
+                                        e.preventDefault();
+                                        handleLinkClick(link.href);
+                                    } else {
+                                        setIsOpen(false);
+                                    }
+                                }}
                                 className="text-lg text-gray-300"
-                                onClick={() => setIsOpen(false)}
                             >
                                 {link.name}
                             </Link>

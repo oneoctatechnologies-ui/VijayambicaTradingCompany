@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import Section from "@/components/Section";
 import Footer from "@/components/Footer";
 
@@ -6,6 +10,13 @@ export default function PrivacyPolicy() {
         <main className="min-h-screen bg-white">
             <Section className="pt-32 pb-20">
                 <div className="max-w-3xl mx-auto">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center gap-2 text-industrial-green hover:text-industrial-green-light transition-colors mb-8 group"
+                    >
+                        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-sm font-medium uppercase tracking-wide">Back to Home</span>
+                    </Link>
                     <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-12 tracking-tight">Privacy Policy.</h1>
 
                     <div className="space-y-12 text-gray-600 leading-relaxed font-light text-lg">
