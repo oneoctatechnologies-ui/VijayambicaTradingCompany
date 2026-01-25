@@ -31,7 +31,7 @@ export default function Hero() {
                 className="relative z-10 max-w-5xl"
             >
                 <span className="inline-block py-1 px-3 mb-6 border border-white/20 rounded-full text-xs font-medium tracking-widest text-gray-300 uppercase">
-                    Since 2002
+                    Since 2007
                 </span>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8">
                     Reliable Carton Raw Material <span className="text-gray-400">Supply.</span>

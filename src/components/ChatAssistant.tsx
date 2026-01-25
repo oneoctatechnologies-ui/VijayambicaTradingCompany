@@ -194,22 +194,20 @@ export default function ChatAssistant() {
                     </div>
 
                     {/* Quick Replies */}
-                    {messages.length <= 1 && (
-                        <div className="px-4 pb-2 border-t border-gray-200 bg-white">
-                            <p className="text-xs text-gray-600 mb-2 font-medium">Quick replies:</p>
-                            <div className="flex flex-wrap gap-2 mb-2">
-                                {QUICK_ACTIONS.map((action) => (
-                                    <button
-                                        key={action.id}
-                                        onClick={() => handleAction(action.id, action.label)}
-                                        className="px-4 py-2 bg-white border-2 border-gray-300 rounded-full text-sm text-gray-700 hover:border-industrial-green hover:text-industrial-green transition-colors"
-                                    >
-                                        {action.label}
-                                    </button>
-                                ))}
-                            </div>
+                    <div className="px-4 pb-2 border-t border-gray-200 bg-white">
+                        <p className="text-xs text-gray-600 mb-2 font-medium">Quick replies:</p>
+                        <div className="flex flex-wrap gap-2 mb-2">
+                            {QUICK_ACTIONS.map((action) => (
+                                <button
+                                    key={action.id}
+                                    onClick={() => handleAction(action.id, action.label)}
+                                    className="px-4 py-2 bg-white border-2 border-gray-300 rounded-full text-sm text-gray-700 hover:border-industrial-green hover:text-industrial-green transition-colors"
+                                >
+                                    {action.label}
+                                </button>
+                            ))}
                         </div>
-                    )}
+                    </div>
 
                     {/* Input */}
                     <div className="p-4 border-t border-gray-200 bg-white">
@@ -220,7 +218,7 @@ export default function ChatAssistant() {
                                 onChange={(e) => setInputMessage(e.target.value)}
                                 onKeyPress={handleKeyPress}
                                 placeholder="Type your message..."
-                                className="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-full focus:outline-none focus:border-industrial-green transition-colors text-sm"
+                                className="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-full focus:outline-none focus:border-industrial-green transition-colors text-sm text-gray-900 placeholder:text-gray-400"
                             />
                             <button
                                 onClick={handleSendMessage}
