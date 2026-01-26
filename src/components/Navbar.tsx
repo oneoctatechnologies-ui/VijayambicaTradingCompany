@@ -93,19 +93,19 @@ export default function Navbar() {
 
     return (
         <>
-            <motion.nav
-                className={`fixed top-0 left-0 right-0 z-[1000] w-full pointer-events-auto py-4 md:py-6 ${
+            <nav
+                className={`fixed top-0 left-0 right-0 z-[1000] w-full pointer-events-auto ${
                     isSolid 
                         ? "bg-black py-3 md:py-4" 
-                        : "bg-transparent"
+                        : "bg-transparent py-4 md:py-6"
                 }`}
                 style={{
                     transition: 'background-color 400ms ease, box-shadow 400ms ease',
-                    boxShadow: isSolid ? '0 2px 10px rgba(0,0,0,0.25)' : 'none'
+                    boxShadow: isSolid ? '0 2px 10px rgba(0,0,0,0.25)' : 'none',
+                    margin: 0,
+                    paddingLeft: 0,
+                    paddingRight: 0
                 }}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.8 }}
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto">
                     <Link
@@ -156,7 +156,7 @@ export default function Navbar() {
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
-            </motion.nav>
+            </nav>
 
             {/* Mobile Menu Full-Screen Overlay */}
             <AnimatePresence>
