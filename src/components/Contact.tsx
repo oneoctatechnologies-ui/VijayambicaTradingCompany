@@ -41,7 +41,7 @@ export default function Contact() {
     };
 
     return (
-        <Section id="contact" className="bg-white py-16 md:py-24 lg:py-32">
+        <Section id="contact" className="bg-white py-16 md:py-24 lg:py-32 scroll-mt-24 md:scroll-mt-28">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-32 items-start">
                     {/* Left Column - Contact Info */}
