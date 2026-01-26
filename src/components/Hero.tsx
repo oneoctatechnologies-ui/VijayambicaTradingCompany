@@ -25,7 +25,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative z-10 max-w-5xl"
+                className="relative z-10 max-w-5xl pt-20 md:pt-0"
             >
                 <span className="inline-block py-1 px-3 mb-6 border border-white/20 rounded-full text-xs font-medium tracking-widest text-gray-300 uppercase">
                     Since 2007

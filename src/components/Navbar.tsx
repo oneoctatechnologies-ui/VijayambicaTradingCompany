@@ -158,79 +158,57 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Full-Screen Overlay */}
             <AnimatePresence>
                 {isOpen && (
-                    <>
-                        {/* Backdrop */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99] md:hidden"
-                        />
-                        
-                        {/* Mobile Menu */}
-                        <motion.div
-                            initial={{ x: "100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "100%" }}
-                            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="fixed top-0 right-0 h-full w-[320px] max-w-[90vw] bg-charcoal shadow-2xl z-[101] md:hidden flex flex-col"
-                        >
-                            {/* Mobile Menu Header */}
-                            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 bg-charcoal flex-shrink-0">
-                                <Link
-                                    href="/"
-                                    onClick={(e) => {
-                                        handleLinkClick("/", e);
-                                    }}
-                                    className="flex items-center gap-2 group flex-1 min-w-0"
-                                >
-                                    <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-white group-hover:text-gray-200 transition-colors truncate">
-                                        VIJAYAMBICA TRADING CO.
-                                    </span>
-                                </Link>
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-gray-400 hover:text-white transition-colors p-2 flex-shrink-0 -mr-2"
-                                    aria-label="Close menu"
-                                >
-                                    <X size={22} />
-                                </button>
-                            </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 top-0 left-0 w-full h-screen bg-charcoal z-[1001] md:hidden flex flex-col"
+                    >
+                        {/* Mobile Menu Header */}
+                        <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-gray-800 flex-shrink-0">
+                            <div className="flex-1"></div>
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="text-white hover:text-gray-300 transition-colors p-2"
+                                aria-label="Close menu"
+                            >
+                                <X size={28} />
+                            </button>
+                        </div>
 
-                            {/* Mobile Menu Items - Scrollable */}
-                            <div className="flex flex-col py-4 overflow-y-auto flex-1">
-                                {links.map((link) => {
-                                    const Icon = link.icon;
-                                    return (
-                                        <Link
-                                            key={link.name}
-                                            href={link.href}
-                                            onClick={(e) => {
-                                                handleLinkClick(link.href, e);
-                                            }}
-                                            className="flex items-center gap-4 px-5 py-4 text-gray-300 hover:text-white hover:bg-gray-800/50 active:bg-gray-800/70 transition-all group min-h-[48px]"
-                                        >
-                                            <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
-                                            <span className="text-base font-medium uppercase tracking-wide">{link.name}</span>
-                                        </Link>
-                                    );
-                                })}
-                                <Link
-                                    href="/#contact"
-                                    onClick={(e) => {
-                                        handleLinkClick("/#contact", e);
-                                    }}
-                                    className="mx-5 mt-4 mb-6 px-6 py-4 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light active:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide min-h-[48px] flex items-center justify-center"
-                                >
-                                    Get in Touch
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </>
+                        {/* Mobile Menu Items - Scrollable */}
+                        <div className="flex flex-col py-8 overflow-y-auto flex-1 px-6">
+                            {links.map((link) => {
+                                const Icon = link.icon;
+                                return (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={(e) => {
+                                            handleLinkClick(link.href, e);
+                                        }}
+                                        className="flex items-center gap-4 px-4 py-5 text-white hover:bg-gray-800/50 active:bg-gray-800/70 transition-all group min-h-[56px] rounded-lg"
+                                    >
+                                        <Icon size={24} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
+                                        <span className="text-lg font-medium uppercase tracking-wide">{link.name}</span>
+                                    </Link>
+                                );
+                            })}
+                            <Link
+                                href="/#contact"
+                                onClick={(e) => {
+                                    handleLinkClick("/#contact", e);
+                                }}
+                                className="mt-6 px-6 py-4 bg-industrial-green text-white font-semibold text-base rounded-sm hover:bg-industrial-green-light active:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide min-h-[56px] flex items-center justify-center"
+                            >
+                                Get in Touch
+                            </Link>
+                        </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
         </>
