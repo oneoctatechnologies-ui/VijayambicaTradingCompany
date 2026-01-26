@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, Info, Cog, Award, Phone } from "lucide-react";
 
 const links = [
@@ -17,28 +17,66 @@ const links = [
 export default function Navbar() {
     const pathname = usePathname();
     const router = useRouter();
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isHeroVisible, setIsHeroVisible] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
-    const { scrollY } = useScroll();
 
-    // Detect scroll position - use 60px threshold
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        setIsScrolled(latest > 60);
-    });
-
-    // Also use window scroll listener for mobile compatibility
+    // IntersectionObserver to detect hero section visibility
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 60);
-        };
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Check initial state
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        // Only observe on home page
+        if (pathname !== "/") {
+            setIsHeroVisible(false);
+            return;
+        }
 
-    // On home page: transparent when at top, solid black when scrolled
+        let observer: IntersectionObserver | null = null;
+        let retryTimeout: NodeJS.Timeout | null = null;
+
+        const findAndObserveHero = () => {
+            const heroSection = document.querySelector('section:first-of-type');
+            if (!heroSection) {
+                // Retry if element not found (might not be mounted yet)
+                retryTimeout = setTimeout(findAndObserveHero, 50);
+                return;
+            }
+
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        // Hero is visible when intersectionRatio > 0.15
+                        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio > 0.15);
+                    });
+                },
+                {
+                    threshold: [0, 0.1, 0.15, 0.2],
+                    rootMargin: '0px'
+                }
+            );
+
+            observer.observe(heroSection);
+
+            // Set initial state
+            const rect = heroSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            setIsHeroVisible(isVisible);
+        };
+
+        // Start observing
+        findAndObserveHero();
+
+        // Cleanup
+        return () => {
+            if (retryTimeout) {
+                clearTimeout(retryTimeout);
+            }
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, [pathname]);
+
+    // On home page: transparent when hero visible, solid black when hero not visible
     // On other pages: always solid
-    const isSolid = pathname !== "/" || isScrolled;
+    const isSolid = pathname !== "/" || !isHeroVisible;
 
     // Prevent body scroll when mobile menu is open
     useEffect(() => {
@@ -122,6 +160,7 @@ export default function Navbar() {
                     paddingRight: 0,
                     backgroundColor: isSolid ? '#000' : 'transparent',
                     border: 'none',
+                    borderBottom: 'none',
                     outline: 'none',
                     boxShadow: 'none',
                     backdropFilter: 'none',
