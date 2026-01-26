@@ -55,6 +55,30 @@ export default function Footer() {
                         </ul>
                     </div>
 
+                    {/* Legal */}
+                    <div>
+                        <h5 className="font-bold text-white/70 mb-6 uppercase tracking-[0.25em] text-xs">
+                            Legal
+                        </h5>
+                        <ul className="space-y-3.5 text-sm text-gray-500">
+                            <li>
+                                <Link href="/privacy-policy" className="hover:text-white/90 transition-colors duration-300">
+                                    Privacy Policy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/terms-of-service" className="hover:text-white/90 transition-colors duration-300">
+                                    Terms of Service
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/operational-policy" className="hover:text-white/90 transition-colors duration-300">
+                                    Operational Policy
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+
                     {/* Operations */}
                     <div>
                         <h5 className="font-bold text-white/70 mb-6 uppercase tracking-[0.25em] text-xs">
@@ -89,19 +113,21 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-gray-600 font-medium">
-                    <div>
-                        © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
-                    </div>
-                    <div className="flex gap-6 md:gap-8">
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-4">
                         <Link href="/privacy-policy" className="hover:text-white/80 transition-colors duration-300">
                             Privacy Policy
                         </Link>
+                        <span className="hidden md:inline">•</span>
                         <Link href="/terms-of-service" className="hover:text-white/80 transition-colors duration-300">
                             Terms of Service
                         </Link>
+                        <span className="hidden md:inline">•</span>
                         <Link href="/operational-policy" className="hover:text-white/80 transition-colors duration-300">
                             Operational Policy
                         </Link>
+                    </div>
+                    <div className="text-center md:text-right">
+                        © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
                     </div>
                 </div>
 

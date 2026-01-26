@@ -146,24 +146,24 @@ export default function Navbar() {
                             animate={{ x: 0 }}
                             exit={{ x: "-100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="fixed top-0 left-0 h-full w-[280px] bg-charcoal shadow-2xl z-[100] md:hidden overflow-y-auto"
+                            className="fixed top-0 left-0 h-full w-[300px] max-w-[85vw] bg-charcoal shadow-2xl z-[100] md:hidden overflow-y-auto"
                         >
                             {/* Mobile Menu Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-gray-800">
+                            <div className="flex items-center justify-between p-5 border-b border-gray-800 sticky top-0 bg-charcoal z-10">
                                 <Link
                                     href="/"
                                     onClick={(e) => {
                                         handleLinkClick("/", e);
                                     }}
-                                    className="flex items-center gap-2 group"
+                                    className="flex items-center gap-2 group flex-1 min-w-0"
                                 >
-                                    <span className="text-base font-bold tracking-widest uppercase text-white group-hover:text-gray-200 transition-colors">
+                                    <span className="text-sm font-bold tracking-wider uppercase text-white group-hover:text-gray-200 transition-colors truncate">
                                         VIJAYAMBICA TRADING CO.
                                     </span>
                                 </Link>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="text-gray-400 hover:text-white transition-colors p-2"
+                                    className="text-gray-400 hover:text-white transition-colors p-2 flex-shrink-0"
                                     aria-label="Close menu"
                                 >
                                     <X size={24} />
@@ -171,7 +171,7 @@ export default function Navbar() {
                             </div>
 
                             {/* Mobile Menu Items */}
-                            <div className="flex flex-col py-4">
+                            <div className="flex flex-col py-2">
                                 {links.map((link) => {
                                     const Icon = link.icon;
                                     return (
@@ -181,9 +181,9 @@ export default function Navbar() {
                                             onClick={(e) => {
                                                 handleLinkClick(link.href, e);
                                             }}
-                                            className="flex items-center gap-4 px-6 py-4 text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all group"
+                                            className="flex items-center gap-4 px-5 py-3.5 text-gray-300 hover:text-white hover:bg-gray-800/50 active:bg-gray-800/70 transition-all group"
                                         >
-                                            <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors" />
+                                            <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
                                             <span className="text-base font-medium uppercase tracking-wide">{link.name}</span>
                                         </Link>
                                     );
@@ -193,7 +193,7 @@ export default function Navbar() {
                                     onClick={(e) => {
                                         handleLinkClick("/#contact", e);
                                     }}
-                                    className="mx-6 mt-4 px-6 py-3 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide"
+                                    className="mx-5 mt-3 mb-4 px-6 py-3 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light active:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide"
                                 >
                                     Get in Touch
                                 </Link>

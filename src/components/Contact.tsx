@@ -45,7 +45,7 @@ export default function Contact() {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-32 items-start">
                     {/* Left Column - Contact Info */}
-                    <div className="order-2 lg:order-1">
+                    <div className="order-1 lg:order-1">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6 tracking-tight">
                             Get In Touch.
                         </h2>
@@ -88,7 +88,7 @@ export default function Contact() {
                     </div>
 
                     {/* Right Column - Contact Form */}
-                    <div className="order-1 lg:order-2">
+                    <div className="order-2 lg:order-2">
                         <div className="bg-white p-8 md:p-10 lg:p-12 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.03)] rounded-lg">
                             {!isSubmitted ? (
                                 <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
@@ -161,9 +161,11 @@ export default function Contact() {
                                             name="requirement"
                                             value={formData.requirement}
                                             onChange={handleChange}
-                                            className="w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-industrial-green focus:outline-none transition-colors text-base md:text-lg text-charcoal font-medium bg-white"
+                                            className={`w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-industrial-green focus:outline-none transition-colors text-base md:text-lg bg-white ${
+                                                formData.requirement === "" ? "text-gray-400 font-normal" : "text-charcoal font-normal"
+                                            }`}
                                         >
-                                            <option value="">Select requirement</option>
+                                            <option value="" className="text-gray-400">Select requirement</option>
                                             <option value="less-100">Less than 100 Tons / Month</option>
                                             <option value="100-500">100 - 500 Tons / Month</option>
                                             <option value="500-plus">500+ Tons / Month</option>
