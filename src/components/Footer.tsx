@@ -9,7 +9,7 @@ export default function Footer() {
             }}
         >
             <div className="max-w-7xl mx-auto px-6">
-                <div className="grid md:grid-cols-4 gap-12 lg:gap-20 mb-20">
+                <div className="grid md:grid-cols-5 gap-12 lg:gap-20 mb-20">
                     {/* Brand Section */}
                     <div className="col-span-1 md:col-span-2">
                         <h4 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-white uppercase">

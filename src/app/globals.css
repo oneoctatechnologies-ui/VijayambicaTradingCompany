@@ -40,3 +40,14 @@ h1, h2, h3, h4, h5, h6 {
 .button-glow-hover:hover {
   box-shadow: 0 0 20px rgba(191, 215, 255, 0.2), 0 0 40px rgba(191, 215, 255, 0.1);
 }
+
+/* Navbar spacing */
+.pt-navbar {
+  padding-top: 4rem; /* 64px for desktop */
+}
+
+@media (max-width: 768px) {
+  .pt-navbar {
+    padding-top: 4rem; /* 64px for mobile - matches h-16 */
+  }
+}
