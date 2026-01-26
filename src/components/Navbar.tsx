@@ -25,7 +25,7 @@ export default function Navbar() {
         setIsScrolled(latest > 50);
     });
 
-    const isSolid = pathname !== "/" || isScrolled;
+    const isSolid = pathname !== "/" || isScrolled || isOpen;
 
     const handleLinkClick = (href: string, e?: React.MouseEvent) => {
         if (e) {
@@ -137,7 +137,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="md:hidden overflow-hidden"
+                            className="md:hidden overflow-hidden bg-charcoal/95 backdrop-blur-md"
                         >
                             <ul className="flex flex-col gap-2 pb-4">
                                 {links.map((link, index) => {

@@ -49,14 +49,11 @@ export default function Footer() {
                 <div>
                     © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
                 </div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 mt-12 flex justify-center md:justify-end">
                 <a
                     href="https://oneocta.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex flex-col items-center md:items-end gap-1"
+                    className="group flex items-center gap-2"
                 >
                     <span className="text-[10px] uppercase tracking-[0.4em] text-gray-400 group-hover:text-white transition-all font-medium">
                         MADE BY ONEOCTA.COM
