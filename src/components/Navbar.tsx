@@ -90,10 +90,11 @@ export default function Navbar() {
         };
     }, [isOpen]);
 
-    const handleLinkClick = (href: string, e?: React.MouseEvent) => {
-        if (e) {
-            e.preventDefault();
-        }
+    const handleLinkClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        
+        // Close mobile menu
+        setIsOpen(false);
         
         if (href === "/") {
             // If clicking home, always scroll to top
@@ -108,20 +109,24 @@ export default function Navbar() {
         } else if (href.startsWith("/#")) {
             // Handle hash links with scroll offset for navbar
             const hash = href.split("#")[1];
-            const scrollToSection = () => {
-                if (hash) {
-                    const element = document.getElementById(hash);
-                    if (element) {
-                        // Calculate navbar height (64px on mobile, ~80px on desktop)
-                        const navbarHeight = window.innerWidth < 768 ? 64 : 80;
-                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                        const offsetPosition = elementPosition - navbarHeight;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth"
-                        });
-                    }
+            if (!hash) return;
+            
+            const scrollToSection = (retryCount = 0) => {
+                const element = document.getElementById(hash);
+                if (element) {
+                    // Calculate navbar height (64px on mobile, ~80px on desktop)
+                    const navbarHeight = window.innerWidth < 768 ? 64 : 80;
+                    const elementTop = element.getBoundingClientRect().top;
+                    const currentScroll = window.scrollY || document.documentElement.scrollTop || 0;
+                    const offsetPosition = elementTop + currentScroll - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, offsetPosition),
+                        behavior: "smooth"
+                    });
+                } else if (retryCount < 5) {
+                    // If element not found, try again (max 5 retries)
+                    setTimeout(() => scrollToSection(retryCount + 1), 100);
                 }
             };
             
@@ -130,19 +135,24 @@ export default function Navbar() {
                 router.push("/");
                 setTimeout(() => {
                     scrollToSection();
-                }, 100);
+                }, 300);
             } else {
                 // If we're on home page, just scroll to section
-                scrollToSection();
+                // Small delay to ensure DOM is ready
+                setTimeout(() => {
+                    scrollToSection();
+                }, 10);
             }
+        } else {
+            // Regular navigation (non-hash links)
+            router.push(href);
         }
-        setIsOpen(false);
     };
 
     return (
         <>
             <nav
-                className={`fixed left-0 right-0 z-[1000] w-full pointer-events-auto ${
+                className={`fixed left-0 right-0 z-[1000] w-full ${
                     isSolid 
                         ? "py-3 md:py-4" 
                         : "py-4 md:py-6"
@@ -164,7 +174,8 @@ export default function Navbar() {
                     outline: 'none',
                     boxShadow: 'none',
                     backdropFilter: 'none',
-                    WebkitBackdropFilter: 'none'
+                    WebkitBackdropFilter: 'none',
+                    pointerEvents: 'auto'
                 }}
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto">
