@@ -3,14 +3,12 @@
 @theme {
   --font-inter: var(--font-inter);
   --font-outfit: var(--font-outfit);
-  --font-manrope: var(--font-manrope);
   
   --color-industrial-green: #1E3A2F; 
   --color-industrial-green-light: #2C4F42;
   --color-charcoal: #121212;
   --color-charcoal-light: #1E1E1E;
   --color-off-white: #F5F5F5;
-  --color-ice-blue: #BFD7FF;
 }
 
 :root {
@@ -18,36 +16,12 @@
   --foreground: #F5F5F5;
 }
 
-/* Reset default browser spacing */
-html,
 body {
-  margin: 0;
-  padding: 0;
-  padding-top: 0 !important;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  background: transparent;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-outfit), sans-serif;
-}
-
-/* Premium glow effects */
-.text-glow-ice {
-  text-shadow: 0 0 20px rgba(191, 215, 255, 0.3), 0 0 40px rgba(191, 215, 255, 0.15), 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.button-glow-hover {
-  transition: box-shadow 0.3s ease;
-}
-
-.button-glow-hover:hover {
-  box-shadow: 0 0 20px rgba(191, 215, 255, 0.2), 0 0 40px rgba(191, 215, 255, 0.1);
 }

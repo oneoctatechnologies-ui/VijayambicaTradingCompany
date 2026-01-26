@@ -25,9 +25,6 @@ export default function Section({ children, className, id, dark = false }: Secti
                 dark ? "bg-charcoal text-white" : "bg-off-white text-charcoal",
                 className
             )}
-            style={id ? {
-                scrollMarginTop: '80px'
-            } : undefined}
         >
             <motion.div
                 initial={{ opacity: 0, y: 30 }}

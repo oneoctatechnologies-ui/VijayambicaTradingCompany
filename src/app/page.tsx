@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden">
+    <main className="relative bg-white overflow-x-hidden">
       <Hero />
       <About />
       <Journey />

@@ -8,24 +8,24 @@ export default function Hero() {
     const y = useTransform(scrollY, [0, 1000], [0, 400]);
 
     return (
-        <section className="relative h-screen min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden" style={{ margin: 0, marginTop: 0, paddingTop: 0 }}>
+        <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-charcoal">
             {/* Parallax Background Image */}
             <motion.div
-                style={{ y, pointerEvents: 'none' }}
+                style={{ y }}
                 className="absolute inset-0 h-[120%] -top-[10%] pointer-events-none"
             >
-                <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center" style={{ pointerEvents: 'none' }}></div>
+                <div className="absolute inset-0 bg-[url('/hero.png')] bg-cover bg-center"></div>
             </motion.div>
 
             {/* Dark Gradient Overlays for Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-industrial-green/90 z-0" style={{ pointerEvents: 'none' }}></div>
-            <div className="absolute inset-0 bg-black/30 z-0" style={{ pointerEvents: 'none' }}></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-industrial-green/90 z-0"></div>
+            <div className="absolute inset-0 bg-black/30 z-0"></div>
 
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative z-10 max-w-5xl pt-20 md:pt-0"
+                className="relative z-10 max-w-5xl"
             >
                 <span className="inline-block py-1 px-3 mb-6 border border-white/20 rounded-full text-xs font-medium tracking-widest text-gray-300 uppercase">
                     Since 2007
