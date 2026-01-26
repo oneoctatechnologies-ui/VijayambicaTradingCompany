@@ -94,17 +94,26 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-[1000] w-full pointer-events-auto ${
+                className={`fixed left-0 right-0 z-[1000] w-full pointer-events-auto ${
                     isSolid 
-                        ? "bg-black py-3 md:py-4" 
+                        ? "bg-black py-3 md:py-4 backdrop-blur-md" 
                         : "bg-transparent py-4 md:py-6"
                 }`}
                 style={{
-                    transition: 'background-color 400ms ease, box-shadow 400ms ease',
+                    top: 0,
+                    position: 'fixed',
+                    transform: 'translateZ(0)',
+                    willChange: 'transform',
+                    transition: 'background-color 400ms ease, box-shadow 400ms ease, backdrop-filter 400ms ease',
                     boxShadow: isSolid ? '0 2px 10px rgba(0,0,0,0.25)' : 'none',
                     margin: 0,
+                    paddingTop: isSolid ? '0.75rem' : '1rem',
+                    paddingBottom: isSolid ? '0.75rem' : '1rem',
                     paddingLeft: 0,
-                    paddingRight: 0
+                    paddingRight: 0,
+                    backgroundColor: isSolid ? 'rgba(0,0,0,0.85)' : 'transparent',
+                    backdropFilter: isSolid ? 'blur(12px)' : 'none',
+                    WebkitBackdropFilter: isSolid ? 'blur(12px)' : 'none'
                 }}
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto">
