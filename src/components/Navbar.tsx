@@ -42,13 +42,15 @@ export default function Navbar() {
             observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
-                        // Hero is visible when any part is intersecting
-                        // Use intersectionRatio > 0.1 to account for navbar overlay
-                        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio > 0.1);
+                        // Hero is visible when intersecting with viewport
+                        // Check if bottom of hero is still visible (not scrolled past)
+                        const rect = entry.boundingClientRect;
+                        const isStillVisible = rect.bottom > 100; // If bottom is > 100px from top
+                        setIsHeroVisible(entry.isIntersecting && isStillVisible);
                     });
                 },
                 {
-                    threshold: [0, 0.1, 0.15, 0.2],
+                    threshold: [0, 0.1, 0.2, 0.3, 0.5],
                     rootMargin: '0px'
                 }
             );
@@ -57,7 +59,7 @@ export default function Navbar() {
 
             // Set initial state based on current viewport
             const rect = heroSection.getBoundingClientRect();
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            const isVisible = rect.bottom > 100;
             setIsHeroVisible(isVisible);
         };
 
@@ -158,21 +160,17 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed left-0 right-0 w-full ${
-                    isSolid 
-                        ? "py-3 md:py-4" 
-                        : "py-4 md:py-6"
-                }`}
                 style={{
+                    position: 'fixed',
                     top: 0,
                     left: 0,
                     right: 0,
-                    position: 'fixed',
+                    width: '100%',
                     zIndex: 9999,
                     margin: 0,
                     marginTop: 0,
-                    paddingTop: isSolid ? '0.75rem' : '1rem',
-                    paddingBottom: isSolid ? '0.75rem' : '1rem',
+                    paddingTop: isSolid ? '12px' : '16px',
+                    paddingBottom: isSolid ? '12px' : '16px',
                     paddingLeft: 0,
                     paddingRight: 0,
                     backgroundColor: isSolid ? '#000' : 'transparent',
@@ -184,10 +182,11 @@ export default function Navbar() {
                     backdropFilter: 'none',
                     WebkitBackdropFilter: 'none',
                     pointerEvents: 'auto',
-                    transition: 'background-color 300ms ease'
+                    transition: 'background-color 300ms ease',
+                    WebkitTapHighlightColor: 'transparent'
                 }}
             >
-                <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto" style={{ pointerEvents: 'auto' }}>
+                <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white" style={{ pointerEvents: 'auto', height: '64px' }}>
                     <Link
                         href="/"
                         onClick={(e) => {
@@ -258,14 +257,16 @@ export default function Navbar() {
                         
                         {/* Dropdown Menu - slides down from navbar */}
                         <motion.div
-                            initial={{ opacity: 0, y: -100, height: 0 }}
-                            animate={{ opacity: 1, y: 0, height: 'auto' }}
-                            exit={{ opacity: 0, y: -100, height: 0 }}
+                            initial={{ opacity: 0, y: -20, maxHeight: 0 }}
+                            animate={{ opacity: 1, y: 0, maxHeight: '500px' }}
+                            exit={{ opacity: 0, y: -20, maxHeight: 0 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="fixed left-0 right-0 bg-black z-[9999] md:hidden overflow-hidden"
+                            className="fixed left-0 right-0 bg-black z-[9999] md:hidden overflow-hidden shadow-xl"
                             style={{
-                                top: '64px',
-                                pointerEvents: 'auto'
+                                top: 'calc(64px + 12px)',
+                                pointerEvents: 'auto',
+                                border: 'none',
+                                borderTop: 'none'
                             }}
                         >
                             <div className="flex flex-col py-2">
