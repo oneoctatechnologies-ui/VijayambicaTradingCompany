@@ -21,10 +21,20 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { scrollY } = useScroll();
 
-    // Detect scroll position - use 80px threshold
+    // Detect scroll position - use 60px threshold
     useMotionValueEvent(scrollY, "change", (latest) => {
-        setIsScrolled(latest > 80);
+        setIsScrolled(latest > 60);
     });
+
+    // Also use window scroll listener for mobile compatibility
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 60);
+        };
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial state
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // On home page: transparent when at top, solid black when scrolled
     // On other pages: always solid
@@ -96,24 +106,26 @@ export default function Navbar() {
             <nav
                 className={`fixed left-0 right-0 z-[1000] w-full pointer-events-auto ${
                     isSolid 
-                        ? "bg-black py-3 md:py-4 backdrop-blur-md" 
-                        : "bg-transparent py-4 md:py-6"
+                        ? "py-3 md:py-4" 
+                        : "py-4 md:py-6"
                 }`}
                 style={{
                     top: 0,
                     position: 'fixed',
                     transform: 'translateZ(0)',
                     willChange: 'transform',
-                    transition: 'background-color 400ms ease, box-shadow 400ms ease, backdrop-filter 400ms ease',
-                    boxShadow: isSolid ? '0 2px 10px rgba(0,0,0,0.25)' : 'none',
+                    transition: 'background-color 300ms ease',
                     margin: 0,
-                    paddingTop: isSolid ? '0.75rem' : '1rem',
+                    paddingTop: `calc(${isSolid ? '0.75rem' : '1rem'} + env(safe-area-inset-top, 0))`,
                     paddingBottom: isSolid ? '0.75rem' : '1rem',
                     paddingLeft: 0,
                     paddingRight: 0,
-                    backgroundColor: isSolid ? 'rgba(0,0,0,0.85)' : 'transparent',
-                    backdropFilter: isSolid ? 'blur(12px)' : 'none',
-                    WebkitBackdropFilter: isSolid ? 'blur(12px)' : 'none'
+                    backgroundColor: isSolid ? '#000' : 'transparent',
+                    border: 'none',
+                    outline: 'none',
+                    boxShadow: 'none',
+                    backdropFilter: 'none',
+                    WebkitBackdropFilter: 'none'
                 }}
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto">
@@ -167,57 +179,59 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu Full-Screen Overlay */}
+            {/* Mobile Menu Dropdown */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 top-0 left-0 w-full h-screen bg-charcoal z-[1001] md:hidden flex flex-col"
-                    >
-                        {/* Mobile Menu Header */}
-                        <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-gray-800 flex-shrink-0">
-                            <div className="flex-1"></div>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="text-white hover:text-gray-300 transition-colors p-2"
-                                aria-label="Close menu"
-                            >
-                                <X size={28} />
-                            </button>
-                        </div>
-
-                        {/* Mobile Menu Items - Scrollable */}
-                        <div className="flex flex-col py-8 overflow-y-auto flex-1 px-6">
-                            {links.map((link) => {
-                                const Icon = link.icon;
-                                return (
-                                    <Link
-                                        key={link.name}
-                                        href={link.href}
-                                        onClick={(e) => {
-                                            handleLinkClick(link.href, e);
-                                        }}
-                                        className="flex items-center gap-4 px-4 py-5 text-white hover:bg-gray-800/50 active:bg-gray-800/70 transition-all group min-h-[56px] rounded-lg"
-                                    >
-                                        <Icon size={24} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
-                                        <span className="text-lg font-medium uppercase tracking-wide">{link.name}</span>
-                                    </Link>
-                                );
-                            })}
-                            <Link
-                                href="/#contact"
-                                onClick={(e) => {
-                                    handleLinkClick("/#contact", e);
-                                }}
-                                className="mt-6 px-6 py-4 bg-industrial-green text-white font-semibold text-base rounded-sm hover:bg-industrial-green-light active:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide min-h-[56px] flex items-center justify-center"
-                            >
-                                Get in Touch
-                            </Link>
-                        </div>
-                    </motion.div>
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsOpen(false)}
+                            className="fixed inset-0 bg-black/50 z-[999] md:hidden"
+                        />
+                        
+                        {/* Dropdown Menu */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="fixed top-16 left-0 right-0 bg-black z-[1001] md:hidden rounded-b-lg shadow-lg"
+                            style={{
+                                paddingTop: 'env(safe-area-inset-top, 0)'
+                            }}
+                        >
+                            <div className="flex flex-col py-2">
+                                {links.map((link) => {
+                                    const Icon = link.icon;
+                                    return (
+                                        <Link
+                                            key={link.name}
+                                            href={link.href}
+                                            onClick={(e) => {
+                                                handleLinkClick(link.href, e);
+                                            }}
+                                            className="flex items-center gap-3 px-6 py-4 text-white hover:bg-gray-900 transition-all group"
+                                        >
+                                            <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
+                                            <span className="text-base font-medium uppercase tracking-wide">{link.name}</span>
+                                        </Link>
+                                    );
+                                })}
+                                <Link
+                                    href="/#contact"
+                                    onClick={(e) => {
+                                        handleLinkClick("/#contact", e);
+                                    }}
+                                    className="mx-4 mt-2 mb-4 px-6 py-3 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide"
+                                >
+                                    Get in Touch
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </>
