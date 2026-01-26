@@ -21,10 +21,13 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { scrollY } = useScroll();
 
+    // Detect scroll position - use 80px threshold
     useMotionValueEvent(scrollY, "change", (latest) => {
-        setIsScrolled(latest > 50);
+        setIsScrolled(latest > 80);
     });
 
+    // On home page: transparent when at top, solid black when scrolled
+    // On other pages: always solid
     const isSolid = pathname !== "/" || isScrolled;
 
     // Prevent body scroll when mobile menu is open
@@ -55,28 +58,34 @@ export default function Navbar() {
                 }, 100);
             }
         } else if (href.startsWith("/#")) {
-            // Handle hash links
+            // Handle hash links with scroll offset for navbar
+            const hash = href.split("#")[1];
+            const scrollToSection = () => {
+                if (hash) {
+                    const element = document.getElementById(hash);
+                    if (element) {
+                        // Calculate navbar height (64px on mobile, ~80px on desktop)
+                        const navbarHeight = window.innerWidth < 768 ? 64 : 80;
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+            };
+            
             if (pathname !== "/") {
                 // If we're not on home page, navigate to home first
                 router.push("/");
                 setTimeout(() => {
-                    const hash = href.split("#")[1];
-                    if (hash) {
-                        const element = document.getElementById(hash);
-                        if (element) {
-                            element.scrollIntoView({ behavior: "smooth" });
-                        }
-                    }
+                    scrollToSection();
                 }, 100);
             } else {
                 // If we're on home page, just scroll to section
-                const hash = href.split("#")[1];
-                if (hash) {
-                    const element = document.getElementById(hash);
-                    if (element) {
-                        element.scrollIntoView({ behavior: "smooth" });
-                    }
-                }
+                scrollToSection();
             }
         }
         setIsOpen(false);
@@ -85,9 +94,15 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 pointer-events-auto ${
-                    isSolid ? "bg-charcoal/90 backdrop-blur-md py-3 md:py-4 shadow-lg" : "bg-transparent py-4 md:py-6"
+                className={`fixed top-0 left-0 right-0 z-[1000] w-full pointer-events-auto py-4 md:py-6 ${
+                    isSolid 
+                        ? "bg-black py-3 md:py-4" 
+                        : "bg-transparent"
                 }`}
+                style={{
+                    transition: 'background-color 400ms ease, box-shadow 400ms ease',
+                    boxShadow: isSolid ? '0 2px 10px rgba(0,0,0,0.25)' : 'none'
+                }}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -143,9 +158,6 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Spacer to prevent content overlap */}
-            <div className="h-16 md:h-0"></div>
-
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isOpen && (
@@ -161,11 +173,11 @@ export default function Navbar() {
                         
                         {/* Mobile Menu */}
                         <motion.div
-                            initial={{ x: "-100%" }}
+                            initial={{ x: "100%" }}
                             animate={{ x: 0 }}
-                            exit={{ x: "-100%" }}
+                            exit={{ x: "100%" }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="fixed top-0 left-0 h-full w-[320px] max-w-[90vw] bg-charcoal shadow-2xl z-[101] md:hidden flex flex-col"
+                            className="fixed top-0 right-0 h-full w-[320px] max-w-[90vw] bg-charcoal shadow-2xl z-[101] md:hidden flex flex-col"
                         >
                             {/* Mobile Menu Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 bg-charcoal flex-shrink-0">

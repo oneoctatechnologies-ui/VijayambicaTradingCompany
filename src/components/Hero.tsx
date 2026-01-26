@@ -8,7 +8,7 @@ export default function Hero() {
     const y = useTransform(scrollY, [0, 1000], [0, 400]);
 
     return (
-        <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-charcoal">
+        <section className="relative h-screen min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
             {/* Parallax Background Image */}
             <motion.div
                 style={{ y }}

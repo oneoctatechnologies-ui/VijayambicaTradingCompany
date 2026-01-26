@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${outfit.variable} ${manrope.variable} antialiased bg-charcoal text-white pt-navbar`}
+        className={`${inter.variable} ${outfit.variable} ${manrope.variable} antialiased text-white`}
       >
         <Navbar />
         {children}

@@ -112,35 +112,21 @@ export default function Footer() {
                 <div className="h-px w-full bg-white/5 mb-8"></div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-gray-600 font-medium">
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-4">
-                        <Link href="/privacy-policy" className="hover:text-white/80 transition-colors duration-300">
-                            Privacy Policy
-                        </Link>
-                        <span className="hidden md:inline">•</span>
-                        <Link href="/terms-of-service" className="hover:text-white/80 transition-colors duration-300">
-                            Terms of Service
-                        </Link>
-                        <span className="hidden md:inline">•</span>
-                        <Link href="/operational-policy" className="hover:text-white/80 transition-colors duration-300">
-                            Operational Policy
-                        </Link>
-                    </div>
-                    <div className="text-center md:text-right">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-widest text-gray-600 font-medium">
+                    <div className="text-center md:text-left">
                         © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
                     </div>
-                </div>
-
-                {/* OneOcta Credit */}
-                <div className="max-w-7xl mx-auto px-6 mt-10 flex justify-center md:justify-end">
-                    <a
-                        href="https://oneocta.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] uppercase tracking-[0.4em] text-gray-600 hover:text-white/70 transition-colors duration-300 font-medium"
-                    >
-                        MADE BY ONEOCTA.COM
-                    </a>
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600">•</span>
+                        <a
+                            href="https://oneocta.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 hover:text-white/70 transition-colors duration-300"
+                        >
+                            MADE BY ONEOCTA.COM
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>
