@@ -21,9 +21,6 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-industrial-green/90 z-0"></div>
             <div className="absolute inset-0 bg-black/30 z-0"></div>
 
-            {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-10 bg-[url('/noise.png')] pointer-events-none z-0"></div>
-
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}

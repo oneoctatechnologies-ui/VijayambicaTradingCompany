@@ -7,12 +7,18 @@ const locations = [
     {
         name: "Primary Branch",
         detail: "Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana – 500048",
+        address: "Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana 500048",
     },
     {
         name: "Secondary Branch",
         detail: "Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana – 500048",
+        address: "Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana 500048",
     },
 ];
+
+const getGoogleMapsUrl = (address: string) => {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+};
 
 export default function Operations() {
     return (
@@ -27,32 +33,48 @@ export default function Operations() {
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 {/* Primary Aggregation Facility */}
-                <div className="bg-white p-10 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col items-start gap-6 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-500">
-                    <div className="text-gray-400">
+                <a
+                    href={getGoogleMapsUrl(locations[0].address)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white p-10 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col items-start gap-6 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-industrial-green/30 transition-all duration-300 cursor-pointer group"
+                >
+                    <div className="text-gray-400 group-hover:text-industrial-green transition-colors">
                         <MapPin size={28} strokeWidth={1} />
                     </div>
-                    <div>
+                    <div className="w-full">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-industrial-green font-bold mb-2 block">Site Area 01</span>
-                        <h3 className="text-xl font-bold text-charcoal mb-3">Primary Aggregation Facility</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                        <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-industrial-green transition-colors">Primary Aggregation Facility</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed font-medium group-hover:text-charcoal transition-colors">
                             Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana – 500048
                         </p>
+                        <span className="text-xs text-industrial-green font-medium mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">
+                            View on Maps →
+                        </span>
                     </div>
-                </div>
+                </a>
 
                 {/* Secondary Buffer & Dispatch Facility */}
-                <div className="bg-white p-10 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col items-start gap-6 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-500">
-                    <div className="text-gray-400">
+                <a
+                    href={getGoogleMapsUrl(locations[1].address)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white p-10 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col items-start gap-6 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-industrial-green/30 transition-all duration-300 cursor-pointer group"
+                >
+                    <div className="text-gray-400 group-hover:text-industrial-green transition-colors">
                         <MapPin size={28} strokeWidth={1} />
                     </div>
-                    <div>
+                    <div className="w-full">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-industrial-green font-bold mb-2 block">Site Area 02</span>
-                        <h3 className="text-xl font-bold text-charcoal mb-3">Secondary Buffer & Dispatch Facility</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                        <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-industrial-green transition-colors">Secondary Buffer & Dispatch Facility</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed font-medium group-hover:text-charcoal transition-colors">
                             Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana – 500048
                         </p>
+                        <span className="text-xs text-industrial-green font-medium mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">
+                            View on Maps →
+                        </span>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div className="mt-20 text-center">

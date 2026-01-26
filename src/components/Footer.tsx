@@ -2,63 +2,120 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#0F0F0F] text-white pt-20 pb-10 border-t border-white/5">
-            <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 lg:gap-24 mb-16">
-                <div className="col-span-1 md:col-span-2">
-                    <h4 className="text-2xl font-bold tracking-tight mb-6 text-white uppercase">Vijayambica <br className="hidden md:block" /> Trading Co.</h4>
-                    <p className="text-gray-400 text-lg leading-relaxed max-w-sm font-light">
-                        Reliable carton raw material supply for paper mills, built on trust and operational discipline since 2007.
-                    </p>
-                    <div className="mt-8 flex items-center gap-3">
-                        <div className="h-px w-8 bg-industrial-green opacity-50"></div>
-                        <p className="text-industrial-green text-sm uppercase tracking-widest font-bold">Industrial Integrity</p>
+        <footer 
+            className="relative text-white pt-24 md:pt-32 pb-12"
+            style={{
+                background: 'linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%)'
+            }}
+        >
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid md:grid-cols-4 gap-12 lg:gap-20 mb-20">
+                    {/* Brand Section */}
+                    <div className="col-span-1 md:col-span-2">
+                        <h4 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-white uppercase">
+                            Vijayambica <br className="hidden md:block" /> Trading Co.
+                        </h4>
+                        <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-md font-light mb-8">
+                            Reliable carton raw material supply for paper mills, built on trust and operational discipline since 2007.
+                        </p>
+                        <div className="h-px w-full max-w-md bg-white/5"></div>
+                    </div>
+
+                    {/* Quick Links */}
+                    <div>
+                        <h5 className="font-bold text-white/70 mb-6 uppercase tracking-[0.25em] text-xs">
+                            Quick Links
+                        </h5>
+                        <ul className="space-y-3.5 text-sm text-gray-500">
+                            <li>
+                                <Link href="/" className="hover:text-white/90 transition-colors duration-300">
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#about" className="hover:text-white/90 transition-colors duration-300">
+                                    About Us
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#process" className="hover:text-white/90 transition-colors duration-300">
+                                    Our Process
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#why-us" className="hover:text-white/90 transition-colors duration-300">
+                                    Value Proposition
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#contact" className="hover:text-white/90 transition-colors duration-300">
+                                    Inquiries
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Operations */}
+                    <div>
+                        <h5 className="font-bold text-white/70 mb-6 uppercase tracking-[0.25em] text-xs">
+                            Operations
+                        </h5>
+                        <ul className="space-y-3.5 text-sm text-gray-500 leading-relaxed">
+                            <li>
+                                Beside Pillar No.117,<br />
+                                Somi Reddy Nagar, Attapur,<br />
+                                Hyderabad, Telangana – 500048
+                            </li>
+                            <li className="pt-1">
+                                <a href="tel:9704234869" className="hover:text-white/90 transition-colors duration-300">
+                                    9704234869
+                                </a>
+                                {", "}
+                                <a href="tel:9393234869" className="hover:text-white/90 transition-colors duration-300">
+                                    9393234869
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:contact@vijayambica.com" className="hover:text-white/90 transition-colors duration-300">
+                                    contact@vijayambica.com
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <div>
-                    <h5 className="font-bold text-white mb-6 uppercase tracking-[0.2em] text-xs opacity-50">Quick Links</h5>
-                    <ul className="space-y-4 text-sm text-gray-400">
-                        <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                        <li><Link href="/#about" className="hover:text-white transition-colors">About Us</Link></li>
-                        <li><Link href="/#process" className="hover:text-white transition-colors">Our Process</Link></li>
-                        <li><Link href="/#why-us" className="hover:text-white transition-colors">Value Proposition</Link></li>
-                        <li><Link href="/#contact" className="hover:text-white transition-colors">Inquiries</Link></li>
-                    </ul>
+                {/* Divider */}
+                <div className="h-px w-full bg-white/5 mb-8"></div>
+
+                {/* Bottom Bar */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-gray-600 font-medium">
+                    <div>
+                        © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
+                    </div>
+                    <div className="flex gap-6 md:gap-8">
+                        <Link href="/privacy-policy" className="hover:text-white/80 transition-colors duration-300">
+                            Privacy Policy
+                        </Link>
+                        <Link href="/terms-of-service" className="hover:text-white/80 transition-colors duration-300">
+                            Terms of Service
+                        </Link>
+                        <Link href="/operational-policy" className="hover:text-white/80 transition-colors duration-300">
+                            Operational Policy
+                        </Link>
+                    </div>
                 </div>
 
-                <div>
-                    <h5 className="font-bold text-white mb-6 uppercase tracking-[0.2em] text-xs opacity-50">Operations</h5>
-                    <ul className="space-y-4 text-sm text-gray-400">
-                        <li className="leading-relaxed">Beside Pillar No.117,<br /> Somi Reddy Nagar, Attapur,<br /> Hyderabad, Telangana – 500048</li>
-                        <li className="pt-2 text-gray-400 font-medium"><a href="tel:9704234869" className="hover:text-industrial-green transition-colors">9704234869</a>, <a href="tel:9393234869" className="hover:text-industrial-green transition-colors">9393234869</a></li>
-                        <li><a href="mailto:contact@vijayambica.com" className="hover:text-white transition-colors">contact@vijayambica.com</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest text-gray-500 font-medium">
-                <div>
-                    © {new Date().getFullYear()} Vijayambica Trading Co. All rights reserved.
-                </div>
-                <div className="flex gap-8">
-                    <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                    <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
-                    <Link href="/operational-policy" className="hover:text-white transition-colors">Operational Policy</Link>
-                </div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 mt-12 flex justify-center md:justify-end">
-                <a
-                    href="https://oneocta.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center md:items-end gap-1"
-                >
-                    <span className="text-[10px] uppercase tracking-[0.4em] text-gray-400 group-hover:text-white transition-all font-medium">
+                {/* OneOcta Credit */}
+                <div className="max-w-7xl mx-auto px-6 mt-10 flex justify-center md:justify-end">
+                    <a
+                        href="https://oneocta.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] uppercase tracking-[0.4em] text-gray-600 hover:text-white/70 transition-colors duration-300 font-medium"
+                    >
                         MADE BY ONEOCTA.COM
-                    </span>
-                    <div className="h-[2px] w-8 bg-industrial-green scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right"></div>
-                </a>
+                    </a>
+                </div>
             </div>
         </footer>
     );

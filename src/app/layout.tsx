@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google"; // Updated imports
+import { Inter, Outfit, Manrope } from "next/font/google"; // Updated imports
 import "./globals.css";
 
 const inter = Inter({
@@ -9,6 +9,11 @@ const inter = Inter({
 
 const outfit = Outfit({
   variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -28,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-charcoal text-white pt-navbar`}
+        className={`${inter.variable} ${outfit.variable} ${manrope.variable} antialiased bg-charcoal text-white pt-navbar`}
       >
         <Navbar />
         {children}
