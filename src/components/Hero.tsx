@@ -11,15 +11,15 @@ export default function Hero() {
         <section className="relative h-screen min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden" style={{ margin: 0, marginTop: 0, paddingTop: 0 }}>
             {/* Parallax Background Image */}
             <motion.div
-                style={{ y }}
+                style={{ y, pointerEvents: 'none' }}
                 className="absolute inset-0 h-[120%] -top-[10%] pointer-events-none"
             >
-                <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center"></div>
+                <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center" style={{ pointerEvents: 'none' }}></div>
             </motion.div>
 
             {/* Dark Gradient Overlays for Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-industrial-green/90 z-0"></div>
-            <div className="absolute inset-0 bg-black/30 z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-industrial-green/90 z-0" style={{ pointerEvents: 'none' }}></div>
+            <div className="absolute inset-0 bg-black/30 z-0" style={{ pointerEvents: 'none' }}></div>
 
             <motion.div
                 initial={{ opacity: 0, y: 40 }}

@@ -42,8 +42,9 @@ export default function Navbar() {
             observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
-                        // Hero is visible when intersectionRatio > 0.15
-                        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio > 0.15);
+                        // Hero is visible when any part is intersecting
+                        // Use intersectionRatio > 0.1 to account for navbar overlay
+                        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio > 0.1);
                     });
                 },
                 {
@@ -54,17 +55,20 @@ export default function Navbar() {
 
             observer.observe(heroSection);
 
-            // Set initial state
+            // Set initial state based on current viewport
             const rect = heroSection.getBoundingClientRect();
             const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
             setIsHeroVisible(isVisible);
         };
 
-        // Start observing
-        findAndObserveHero();
+        // Start observing after a small delay to ensure DOM is ready
+        const initTimeout = setTimeout(() => {
+            findAndObserveHero();
+        }, 100);
 
         // Cleanup
         return () => {
+            clearTimeout(initTimeout);
             if (retryTimeout) {
                 clearTimeout(retryTimeout);
             }
@@ -118,7 +122,9 @@ export default function Navbar() {
                     const navbarHeight = window.innerWidth < 768 ? 64 : 80;
                     const elementTop = element.getBoundingClientRect().top;
                     const currentScroll = window.scrollY || document.documentElement.scrollTop || 0;
-                    const offsetPosition = elementTop + currentScroll - navbarHeight;
+                    // Account for scroll-margin-top if set on element
+                    const scrollMargin = parseInt(window.getComputedStyle(element).scrollMarginTop) || 0;
+                    const offsetPosition = elementTop + currentScroll - navbarHeight - scrollMargin;
                     
                     window.scrollTo({
                         top: Math.max(0, offsetPosition),
@@ -152,39 +158,43 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed left-0 right-0 z-[1000] w-full ${
+                className={`fixed left-0 right-0 w-full ${
                     isSolid 
                         ? "py-3 md:py-4" 
                         : "py-4 md:py-6"
                 }`}
                 style={{
                     top: 0,
+                    left: 0,
+                    right: 0,
                     position: 'fixed',
-                    transform: 'translateZ(0)',
-                    willChange: 'transform',
-                    transition: 'background-color 300ms ease',
+                    zIndex: 9999,
                     margin: 0,
-                    paddingTop: `calc(${isSolid ? '0.75rem' : '1rem'} + env(safe-area-inset-top, 0))`,
+                    marginTop: 0,
+                    paddingTop: isSolid ? '0.75rem' : '1rem',
                     paddingBottom: isSolid ? '0.75rem' : '1rem',
                     paddingLeft: 0,
                     paddingRight: 0,
                     backgroundColor: isSolid ? '#000' : 'transparent',
                     border: 'none',
                     borderBottom: 'none',
+                    borderTop: 'none',
                     outline: 'none',
                     boxShadow: 'none',
                     backdropFilter: 'none',
                     WebkitBackdropFilter: 'none',
-                    pointerEvents: 'auto'
+                    pointerEvents: 'auto',
+                    transition: 'background-color 300ms ease'
                 }}
             >
-                <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center text-white h-16 md:h-auto" style={{ pointerEvents: 'auto' }}>
                     <Link
                         href="/"
                         onClick={(e) => {
                             handleLinkClick("/", e);
                         }}
                         className="flex items-center gap-3 group cursor-pointer flex-1 min-w-0"
+                        style={{ pointerEvents: 'auto' }}
                     >
                         <span className={`text-sm md:text-base lg:text-lg font-bold tracking-wider md:tracking-widest uppercase transition-colors truncate ${
                             isSolid ? "text-white hover:text-gray-200" : "text-white hover:text-gray-300"
@@ -194,7 +204,7 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex gap-8 items-center">
+                    <div className="hidden md:flex gap-8 items-center" style={{ pointerEvents: 'auto' }}>
                         {links.map((link) => (
                             <Link
                                 key={link.name}
@@ -203,6 +213,7 @@ export default function Navbar() {
                                     handleLinkClick(link.href, e);
                                 }}
                                 className="text-sm font-medium tracking-wide text-gray-300 hover:text-white transition-colors uppercase"
+                                style={{ pointerEvents: 'auto' }}
                             >
                                 {link.name}
                             </Link>
@@ -213,6 +224,7 @@ export default function Navbar() {
                                 handleLinkClick("/#contact", e);
                             }}
                             className="px-5 py-2 bg-white text-charcoal font-semibold text-sm rounded-sm hover:bg-industrial-green hover:text-white transition-all duration-300"
+                            style={{ pointerEvents: 'auto' }}
                         >
                             Get in Touch
                         </Link>
@@ -223,6 +235,7 @@ export default function Navbar() {
                         className="md:hidden text-white p-2 flex-shrink-0 -mr-2"
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label={isOpen ? "Close menu" : "Open menu"}
+                        style={{ pointerEvents: 'auto' }}
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
@@ -239,18 +252,20 @@ export default function Navbar() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-black/50 z-[999] md:hidden"
+                            className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+                            style={{ pointerEvents: 'auto' }}
                         />
                         
-                        {/* Dropdown Menu */}
+                        {/* Dropdown Menu - slides down from navbar */}
                         <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: -100, height: 0 }}
+                            animate={{ opacity: 1, y: 0, height: 'auto' }}
+                            exit={{ opacity: 0, y: -100, height: 0 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="fixed top-16 left-0 right-0 bg-black z-[1001] md:hidden rounded-b-lg shadow-lg"
+                            className="fixed left-0 right-0 bg-black z-[9999] md:hidden overflow-hidden"
                             style={{
-                                paddingTop: 'env(safe-area-inset-top, 0)'
+                                top: '64px',
+                                pointerEvents: 'auto'
                             }}
                         >
                             <div className="flex flex-col py-2">
@@ -264,6 +279,7 @@ export default function Navbar() {
                                                 handleLinkClick(link.href, e);
                                             }}
                                             className="flex items-center gap-3 px-6 py-4 text-white hover:bg-gray-900 transition-all group"
+                                            style={{ pointerEvents: 'auto' }}
                                         >
                                             <Icon size={20} className="text-industrial-green group-hover:text-industrial-green-light transition-colors flex-shrink-0" />
                                             <span className="text-base font-medium uppercase tracking-wide">{link.name}</span>
@@ -276,6 +292,7 @@ export default function Navbar() {
                                         handleLinkClick("/#contact", e);
                                     }}
                                     className="mx-4 mt-2 mb-4 px-6 py-3 bg-industrial-green text-white font-semibold text-sm rounded-sm hover:bg-industrial-green-light transition-all duration-300 text-center uppercase tracking-wide"
+                                    style={{ pointerEvents: 'auto' }}
                                 >
                                     Get in Touch
                                 </Link>
