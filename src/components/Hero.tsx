@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
     const { scrollY } = useScroll();
@@ -67,49 +66,7 @@ export default function Hero() {
                     </a>
                 </motion.div>
 
-                {/* Custom Mouse-style Scroll Indicator (Visible below CTAs on mobile) */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="mt-8 md:mt-12 flex flex-col items-center gap-2 md:hidden"
-                >
-                    <div className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center p-1">
-                        <motion.div
-                            animate={{
-                                y: [0, 12, 0],
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                            className="w-1 h-2 bg-white/60 rounded-full"
-                        />
-                    </div>
-                </motion.div>
-            </motion.div>
 
-            {/* Desktop-only at-bottom scroll indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
-            >
-                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1.5">
-                    <motion.div
-                        animate={{
-                            y: [0, 16, 0],
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-                        className="w-1 h-1.5 bg-white/50 rounded-full"
-                    />
-                </div>
             </motion.div>
         </section>
     );
