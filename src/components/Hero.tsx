@@ -8,7 +8,7 @@ export default function Hero() {
     const y = useTransform(scrollY, [0, 1000], [0, 400]);
 
     return (
-        <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-charcoal">
+        <section className="relative h-[100svh] min-h-[700px] flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-charcoal">
             {/* Parallax Background Image */}
             <motion.div
                 style={{ y }}
@@ -25,18 +25,20 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative z-10 max-w-5xl"
+                className="relative z-10 max-w-5xl pb-24 md:pb-0"
             >
+                {/* Trust Pill - Anchored to Headline */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.9 }}
                     transition={{ delay: 0.2, duration: 0.2 }}
-                    className="flex justify-center mb-6 md:mb-8 mt-24 md:mt-0"
+                    className="flex justify-center mb-6 md:mb-8"
                 >
-                    <span className="inline-block py-1.5 px-4 border border-white/10 bg-white/5 rounded-full text-xs md:text-sm font-medium tracking-[0.2em] text-gray-300/90 uppercase backdrop-blur-sm">
+                    <span className="inline-block py-1.5 px-4 border border-white/10 bg-white/5 rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] text-gray-300/90 uppercase backdrop-blur-sm">
                         Since 2007
                     </span>
                 </motion.div>
+
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8">
                     Reliable Carton Raw Material <span className="text-gray-400">Supply.</span>
                 </h1>
@@ -51,7 +53,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 1 }}
-                    className="mt-12 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center w-full max-w-md mx-auto md:max-w-none"
+                    className="mt-12 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center w-full max-w-sm mx-auto md:max-w-none"
                 >
                     <a
                         href="#contact"
@@ -66,48 +68,26 @@ export default function Hero() {
                         Our Operations
                     </a>
                 </motion.div>
-
-                {/* Custom Mouse-style Scroll Indicator (Visible below CTAs on mobile) */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="mt-8 md:mt-12 flex flex-col items-center gap-2 md:hidden"
-                >
-                    <div className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center p-1">
-                        <motion.div
-                            animate={{
-                                y: [0, 12, 0],
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                            className="w-1 h-2 bg-white/60 rounded-full"
-                        />
-                    </div>
-                </motion.div>
             </motion.div>
 
-            {/* Desktop-only at-bottom scroll indicator */}
+            {/* Unified Scroll Indicator - Anchored to Viewport Bottom */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.6 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+                className="absolute bottom-12 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
             >
-                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1.5">
+                <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-white/30 rounded-full flex justify-center p-1 md:p-1.5">
                     <motion.div
                         animate={{
-                            y: [0, 16, 0],
+                            y: [0, 12, 0],
                         }}
                         transition={{
                             duration: 1.5,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="w-1 h-1.5 bg-white/50 rounded-full"
+                        className="w-1 h-1.5 md:h-2 bg-white/50 rounded-full"
                     />
                 </div>
             </motion.div>
