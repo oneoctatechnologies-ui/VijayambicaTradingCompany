@@ -1,8 +1,7 @@
 "use client";
 
 import Section from "./Section";
-import { Scale, IndianRupee, Handshake, ShieldCheck, Truck } from "lucide-react";
-import { motion } from "framer-motion";
+import { Scale, IndianRupee, ShieldCheck, Truck } from "lucide-react";
 
 const vendorBenefits = [
     {
@@ -47,15 +46,9 @@ export default function TrustedVendors() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 px-4">
                 {vendorBenefits.map((benefit, index) => (
-                    <motion.div
+                    <div
                         key={index}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.6, delay: index * 0.2 }}
-                        whileHover={{ y: -5, boxShadow: "0 12px 30px rgba(0,0,0,0.08)" }}
-                        whileTap={{ y: -2 }}
-                        className="bg-white p-8 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-500"
+                        className="bg-white p-8 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] transition-all duration-300 transform md:hover:-translate-y-1"
                     >
                         <div className="mb-6 text-[#1F3D2B]/90 bg-[#1F3D2B]/5 w-fit p-3 rounded-lg">
                             <benefit.icon size={26} strokeWidth={1.5} />
@@ -64,7 +57,7 @@ export default function TrustedVendors() {
                         <p className="text-gray-500 text-sm leading-relaxed">
                             {benefit.description}
                         </p>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </Section>
