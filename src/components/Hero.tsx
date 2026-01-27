@@ -40,8 +40,8 @@ export default function Hero() {
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8">
                     Reliable Carton Raw Material <span className="text-gray-400">Supply.</span>
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-6 font-medium max-w-4xl mx-auto italic">
-                    "Consistent quality-grade carton raw material, verified at source and maintained through every stage of handling."
+                <p className="text-lg md:text-xl text-gray-400 mb-6 font-medium max-w-4xl mx-auto italic">
+                    "We source and maintain premium carton materials with total traceability.."
                 </p>
                 <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
                     The trusted sourcing partner for paper mills. Supporting production with consistent supply, built on long-term local sourcing relationships.
