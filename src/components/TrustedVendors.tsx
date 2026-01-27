@@ -49,11 +49,13 @@ export default function TrustedVendors() {
                 {vendorBenefits.map((benefit, index) => (
                     <motion.div
                         key={index}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                        className="bg-white p-8 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300"
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        whileHover={{ y: -5, boxShadow: "0 12px 30px rgba(0,0,0,0.08)" }}
+                        whileTap={{ y: -2 }}
+                        className="bg-white p-8 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-500"
                     >
                         <div className="mb-6 text-[#1F3D2B]/90 bg-[#1F3D2B]/5 w-fit p-3 rounded-lg">
                             <benefit.icon size={26} strokeWidth={1.5} />
