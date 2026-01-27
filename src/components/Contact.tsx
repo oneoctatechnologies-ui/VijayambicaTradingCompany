@@ -18,7 +18,7 @@ export default function Contact() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitted(true);
-        
+
         // Reset form after 4 seconds
         setTimeout(() => {
             setIsSubmitted(false);
@@ -52,9 +52,12 @@ export default function Contact() {
                         <p className="text-industrial-green font-medium text-lg md:text-xl mb-6">
                             Trusted supply partner for paper mills across the region.
                         </p>
-                        <p className="text-gray-500 text-base md:text-lg mb-12 font-light leading-relaxed">
+                        <p className="text-gray-500 text-base md:text-lg mb-8 font-light leading-relaxed">
                             Reach out to discuss industrial-scale supply requirements or established sourcing opportunities.
                             We prioritize long-term stability and professional coordination across our network.
+                        </p>
+                        <p className="text-gray-400 text-sm md:text-base mb-12 font-medium italic border-l-2 border-industrial-green/30 pl-4">
+                            "Our team coordinates closely to ensure timely delivery, consistent volume, and quality-grade raw material aligned with mill specifications."
                         </p>
 
                         <div className="space-y-8">
@@ -161,9 +164,8 @@ export default function Contact() {
                                             name="requirement"
                                             value={formData.requirement}
                                             onChange={handleChange}
-                                            className={`w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-industrial-green focus:outline-none transition-colors text-base md:text-lg bg-white ${
-                                                formData.requirement === "" ? "text-gray-400 font-normal" : "text-charcoal font-normal"
-                                            }`}
+                                            className={`w-full px-0 py-3 bg-transparent border-b border-gray-200 focus:border-industrial-green focus:outline-none transition-colors text-base md:text-lg bg-white ${formData.requirement === "" ? "text-gray-400 font-normal" : "text-charcoal font-normal"
+                                                }`}
                                         >
                                             <option value="" className="text-gray-400">Select requirement</option>
                                             <option value="less-100">Less than 100 Tons / Month</option>

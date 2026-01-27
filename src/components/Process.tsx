@@ -1,7 +1,7 @@
 "use client";
 
 import Section from "./Section";
-import { PackageSearch, Boxes, Truck, Factory } from "lucide-react";
+import { PackageSearch, Boxes, Truck, Factory, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const steps = [
@@ -14,6 +14,11 @@ const steps = [
         title: "Consolidation",
         description: "Sorting and organizing volumes at our branches to prepare for bulk transport.",
         icon: Boxes,
+    },
+    {
+        title: "Quality Verification",
+        description: "Incoming material is checked for grade consistency and handling condition before consolidation.",
+        icon: ShieldCheck,
     },
     {
         title: "Optimized Handling",
@@ -40,7 +45,7 @@ export default function Process() {
                 </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8 relative">
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8 relative">
                 {/* Connector Line (Desktop) */}
                 <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-200 z-0"></div>
 

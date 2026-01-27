@@ -22,6 +22,11 @@ export default function About() {
                             meeting the rigorous production schedules of our clients without fail.
                         </p>
                         <p>
+                            Quality is never assumed—it is verified. Every batch we aggregate is inspected for grade consistency,
+                            moisture control, and handling condition before consolidation. Our long-term relationships with
+                            trusted local sources ensure predictable quality, not surprises.
+                        </p>
+                        <p>
                             With over <strong>20 years of operational excellence</strong>, we understand that reliability isn't a luxury—it's a necessity.
                         </p>
                     </div>

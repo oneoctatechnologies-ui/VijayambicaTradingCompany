@@ -20,17 +20,22 @@ const testimonials = [
         role: "Proprietor",
         entity: "Local Sourcing Vendor",
     },
+    {
+        quote: "What sets Vijayambica apart is not just volume, but consistency of quality. The material arrives clean, well-handled, and exactly as specified—batch after batch.",
+        role: "Production Manager",
+        entity: "Kraft Paper Mill",
+    },
 ];
 
 export default function Testimonials() {
     return (
         <Section id="testimonials" className="bg-[#F6F6F6] text-charcoal relative overflow-hidden">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-7xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center tracking-tight text-[#1F2F2A]">
                     Voices of Trust.
                 </h2>
 
-                <div className="grid md:grid-cols-3 gap-10">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {testimonials.map((item, index) => (
                         <motion.div
                             key={index}

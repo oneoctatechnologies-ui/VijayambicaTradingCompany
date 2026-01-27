@@ -40,6 +40,9 @@ export default function TrustedVendors() {
                 <p className="text-gray-500 text-lg md:text-xl leading-relaxed font-light">
                     Our operations are built on mutual trust. Transparency, fair payments, and respect for every partner—big or small.
                 </p>
+                <p className="text-gray-400 text-base mt-4 font-light italic">
+                    "We maintain fair grading standards and transparent quality checks, ensuring vendors are valued for the true quality of their material."
+                </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 px-4">

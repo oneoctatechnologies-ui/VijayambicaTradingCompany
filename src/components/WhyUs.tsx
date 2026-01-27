@@ -1,7 +1,7 @@
 "use client";
 
 import Section from "./Section";
-import { Clock, BarChart3, ShieldCheck } from "lucide-react";
+import { Clock, BarChart3, ShieldCheck, Handshake } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
@@ -16,9 +16,14 @@ const features = [
         icon: BarChart3,
     },
     {
+        title: "Quality-Assured Raw Material",
+        description: "Mills receive consistent-grade carton raw material with controlled handling and verified sourcing.",
+        icon: ShieldCheck,
+    },
+    {
         title: "Long-Term Reliability",
         description: "We don't just supply; we partner. Our relationships are built on years of delivering on our promises.",
-        icon: ShieldCheck,
+        icon: Handshake,
     },
 ];
 

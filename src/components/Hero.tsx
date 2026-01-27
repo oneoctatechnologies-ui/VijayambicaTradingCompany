@@ -27,12 +27,17 @@ export default function Hero() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="relative z-10 max-w-5xl"
             >
-                <span className="inline-block py-1 px-3 mb-6 border border-white/20 rounded-full text-xs font-medium tracking-widest text-gray-300 uppercase">
-                    Since 2007
-                </span>
+                <div className="flex flex-wrap justify-center gap-3 mb-6">
+                    <span className="inline-block py-1 px-3 border border-white/20 rounded-full text-xs font-medium tracking-widest text-gray-300 uppercase">
+                        Since 2007
+                    </span>
+                </div>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8">
                     Reliable Carton Raw Material <span className="text-gray-400">Supply.</span>
                 </h1>
+                <p className="text-lg md:text-xl text-white/90 mb-6 font-medium max-w-4xl mx-auto italic">
+                    "Consistent quality-grade carton raw material, verified at source and maintained through every stage of handling."
+                </p>
                 <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
                     The trusted sourcing partner for paper mills. Supporting production with consistent supply, built on long-term local sourcing relationships.
                 </p>

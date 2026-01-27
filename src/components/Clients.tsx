@@ -2,7 +2,7 @@
 
 import Section from "./Section";
 import { motion } from "framer-motion";
-import { ShieldCheck, Layers, Factory, MapPin } from "lucide-react";
+import { ShieldCheck, Layers, Factory, MapPin, PackageCheck } from "lucide-react";
 
 const trustStatements = [
     {
@@ -12,6 +12,10 @@ const trustStatements = [
     {
         text: "Consistent high-volume carton raw material supply",
         icon: Layers,
+    },
+    {
+        text: "Quality-graded raw material aligned with kraft and duplex mill requirements",
+        icon: PackageCheck,
     },
     {
         text: "Serving kraft, duplex, and industrial paper mills",
