@@ -46,30 +46,65 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 1 }}
-                    className="mt-12 flex flex-col md:flex-row gap-6 justify-center items-center"
+                    className="mt-12 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center w-full max-w-md mx-auto md:max-w-none"
                 >
                     <a
                         href="#contact"
-                        className="px-8 py-4 bg-white text-charcoal hover:bg-industrial-green hover:text-white transition-all font-semibold rounded-sm text-lg"
+                        className="w-full md:w-auto px-8 py-4 bg-white text-charcoal hover:bg-industrial-green hover:text-white transition-all font-semibold rounded-sm text-lg text-center"
                     >
                         Partner With Us
                     </a>
                     <a
                         href="#about"
-                        className="px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-all font-medium rounded-sm text-lg"
+                        className="w-full md:w-auto px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-all font-medium rounded-sm text-lg text-center"
                     >
                         Our Operations
                     </a>
                 </motion.div>
+
+                {/* Custom Mouse-style Scroll Indicator (Visible below CTAs on mobile) */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                    className="mt-8 md:mt-12 flex flex-col items-center gap-2 md:hidden"
+                >
+                    <div className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center p-1">
+                        <motion.div
+                            animate={{
+                                y: [0, 12, 0],
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+                            className="w-1 h-2 bg-white/60 rounded-full"
+                        />
+                    </div>
+                </motion.div>
             </motion.div>
 
+            {/* Desktop-only at-bottom scroll indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={{ opacity: 0.6 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 animate-bounce"
+                className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
             >
-                <ArrowDown size={32} />
+                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1.5">
+                    <motion.div
+                        animate={{
+                            y: [0, 16, 0],
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                        }}
+                        className="w-1 h-1.5 bg-white/50 rounded-full"
+                    />
+                </div>
             </motion.div>
         </section>
     );
