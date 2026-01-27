@@ -40,7 +40,7 @@ export default function Footer() {
                     <ul className="space-y-4 text-sm text-gray-400">
                         <li className="leading-relaxed">Beside Pillar No.117,<br /> Somi Reddy Nagar, Attapur,<br /> Hyderabad, Telangana – 500048</li>
                         <li className="pt-2 text-gray-400 font-medium"><a href="tel:9704234869" className="hover:text-industrial-green transition-colors">9704234869</a>, <a href="tel:9393234869" className="hover:text-industrial-green transition-colors">9393234869</a></li>
-                        <li><a href="mailto:contact@vijayambica.com" className="hover:text-white transition-colors">contact@vijayambica.com</a></li>
+                        <li><a href="mailto:Vijayambicatradingco@gmail.com" className="hover:text-white transition-colors">Vijayambicatradingco@gmail.com</a></li>
                     </ul>
                 </div>
             </div>

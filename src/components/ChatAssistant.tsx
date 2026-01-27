@@ -21,7 +21,7 @@ const QUICK_ACTIONS = [
 const BOT_RESPONSES: Record<string, string> = {
     supply: "We supply premium carton box raw materials (OCC and NCDL) with 24/7 dispatch readiness to ensure uninterrupted production for paper mills. Our operational discipline ensures consistent volume and quality.",
     locations: "Our operational facilities are located beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad. We are strategically positioned for efficient regional logistics.",
-    contact: "You can reach our coordination team directly at 9704234869 or 9393234869. For formal inquiries, you can also email us at contact@vijayambica.com.",
+    contact: "You can reach our coordination team directly at 9704234869 or 9393234869. For formal inquiries, you can also email us at Vijayambicatradingco@gmail.com.",
     inquiry: "To submit a formal supply or sourcing inquiry, please use the contact form on our website. Would you like me to take you there?",
 };
 
@@ -172,11 +172,10 @@ export default function ChatAssistant() {
                                 className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
                             >
                                 <div
-                                    className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                                        message.sender === "user"
+                                    className={`max-w-[80%] rounded-2xl px-4 py-2 ${message.sender === "user"
                                             ? "bg-industrial-green text-white"
                                             : "bg-white text-gray-700 shadow-md"
-                                    }`}
+                                        }`}
                                 >
                                     <div
                                         className="text-sm whitespace-pre-line"

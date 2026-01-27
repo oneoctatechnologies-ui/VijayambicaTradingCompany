@@ -76,8 +76,8 @@ export default function Contact() {
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Mail size={20} className="text-industrial-green" />
-                                    <a href="mailto:contact@vijayambica.com" className="text-base md:text-lg text-gray-700 font-medium hover:text-industrial-green transition-colors">
-                                        contact@vijayambica.com
+                                    <a href="mailto:Vijayambicatradingco@gmail.com" className="text-base md:text-lg text-gray-700 font-medium hover:text-industrial-green transition-colors">
+                                        Vijayambicatradingco@gmail.com
                                     </a>
                                 </div>
                             </div>

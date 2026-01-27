@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
 
                         <section className="pt-8 border-t border-gray-100">
                             <p className="text-sm italic">
-                                For concerns regarding data privacy, please reach us at contact@vijayambica.com.
+                                For concerns regarding data privacy, please reach us at Vijayambicatradingco@gmail.com.
                             </p>
                             <p className="text-sm mt-2">
                                 Effective Date: January 2026

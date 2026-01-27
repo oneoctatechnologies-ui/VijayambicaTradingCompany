@@ -46,7 +46,7 @@ export default function Operations() {
                         <span className="text-[10px] uppercase tracking-[0.2em] text-industrial-green font-bold mb-2 block">Site Area 01</span>
                         <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-industrial-green transition-colors">Primary Aggregation Facility</h3>
                         <p className="text-gray-400 text-sm leading-relaxed font-medium group-hover:text-charcoal transition-colors">
-                            Beside Pillar No.117, Somi Reddy Nagar, Attapur, Hyderabad, Telangana – 500048
+                            C/18, Moosarambagh Rd, Azad Nagar, Amberpet, Hyderabad, Telangana – 500013
                         </p>
                         <span className="text-xs text-industrial-green font-medium mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">
                             View on Maps →
