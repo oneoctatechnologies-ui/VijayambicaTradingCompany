@@ -31,7 +31,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.9 }}
                     transition={{ delay: 0.2, duration: 0.2 }}
-                    className="flex justify-center mb-6 md:mb-8 mt-12 md:mt-0"
+                    className="flex justify-center mb-6 md:mb-8 mt-24 md:mt-0"
                 >
                     <span className="inline-block py-1.5 px-4 border border-white/10 bg-white/5 rounded-full text-xs md:text-sm font-medium tracking-[0.2em] text-gray-300/90 uppercase backdrop-blur-sm">
                         Since 2007
